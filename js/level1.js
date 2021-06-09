@@ -6,8 +6,7 @@ export class Level1 extends Phaser.Scene{
     }
 
     init() {
-        this.controls = this.input.keyboard.createCursorKeys();
-
+        this.offsetY = 0;
     }
 
     create() {
@@ -16,10 +15,10 @@ export class Level1 extends Phaser.Scene{
         this.player = new Player(
             this,
             this.game.config.width * 0.5,
-            this.game.config.height * 0.5,
-            'player', 6
-        )
-
+            this.game.config.height,
+            'player', 6, false
+            );
+            
         this.physics.add.existing(this.player);
         this.player.body.setCollideWorldBounds(true);
 

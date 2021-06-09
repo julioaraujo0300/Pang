@@ -1,12 +1,13 @@
 export class Menu extends Phaser.Scene{
     constructor(){
         super('Menu');
+
+        this.singlePlayer = false;
     }
 
     init() {
-
     }
-
+    
     create() {
         this.add.image(0,0,'background').setOrigin(0).setScale(2);
         this.offset = 100;
@@ -18,19 +19,18 @@ export class Menu extends Phaser.Scene{
                                                 '2playerbutton').setScale(0.5);
         this.singlePlayerButton.setInteractive();
         this.multiPlayerButton.setInteractive();
-        this.singlePlayerButton.on('pointerdown', () => this.transitionToLevel(true));
-        this.multiPlayerButton.on('pointerdown', () => this.transitionToLevel(false));
+        this.singlePlayerButton.on('pointerdown', () => this.transitionToLevel(1));
+        this.multiPlayerButton.on('pointerdown', () => this.transitionToLevel(2));
     }
 
     update(time){
-        
     }
 
-    transitionToLevel(singlePlayer){
-        if(singlePlayer){
+    transitionToLevel(numberPlayers){
+        if(numberPlayers == 1){
             this.scene.start('Level1');
         }else{
-            this.scene.start('Level2');
+            this.scene.start('Level1Multi');
         }
     }
 }

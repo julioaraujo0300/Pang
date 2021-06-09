@@ -7,7 +7,6 @@ export class Level2 extends Phaser.Scene{
 
     init() {
         this.controls = this.input.keyboard.createCursorKeys();
-
     }
 
     create() {
