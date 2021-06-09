@@ -5,6 +5,8 @@ export class LoadScene extends Phaser.Scene {
 
     preload() {
         this.load.image('background', './images/blue_land.png');
+        this.load.image('1playerbutton', './images/1PlayerButton.png');
+        this.load.image('2playerbutton', './images/2PlayerButton.png');
         this.load.spritesheet('player', './images/player.png', {
             frameWidth: 128,
             frameHeight: 144
@@ -13,7 +15,7 @@ export class LoadScene extends Phaser.Scene {
 
     create() {
         this.createAnimations();
-        this.scene.start('Level1')
+        this.scene.start('Menu');
     }
 
     createAnimations(){
