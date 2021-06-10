@@ -10,16 +10,22 @@ export class Player extends Phaser.Physics.Arcade.Sprite{
         this.initialFrame = frame;
 
         this.secondPlayer = isPlayer2;
+        this.firePressed = false;
 
         this.horizontal_velocity = 200;
 
         this.controls = scene.input.keyboard.createCursorKeys();
-        this.Akey = scene.input.keyboard.addKey('A');
-        this.Dkey = scene.input.keyboard.addKey('D');
-        this.FireKey = scene.input.keyboard.addKey('LeftShift');
+        this.Akey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.Dkey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.FireKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
     }
 
     update(time){
+        this.Controls();
+        this.FireHarpoon();
+    }
+
+    Controls(){
         if(this.secondPlayer){
             if(this.Akey.isDown) {
                 this.setVelocityX(-this.horizontal_velocity);
@@ -34,6 +40,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite{
                     this.anims.play('walking');
                 }
             }else{
+                this.setVelocityY(0);
                 this.setVelocityX(0);
                 if(this.anims.isPlaying){
                     this.anims.stop('walking');
@@ -60,6 +67,26 @@ export class Player extends Phaser.Physics.Arcade.Sprite{
                     this.anims.stop('walking');
                 }
                 this.setFrame(this.initialFrame);
+            }
+        }
+    }
+    FireHarpoon(){
+        if(this.secondPlayer){
+            if(this.FireKey.isDown){
+                this.firePressed = true;
+                // this.harpoon = new Harpoon(
+                //     this,
+                //     this.x,
+                //     this.game.config.height * 0.5,
+                //     'harpoon'
+                // );
+            }else{}
+        }
+        else{
+            if(this.controls.space.isDown){
+                this.firePressed = true;
+            }else{
+                this.firePressed = false;
             }
         }
     }

@@ -5,8 +5,8 @@ import { Level2 } from './level2.js';
 import { Level1Multi } from './level1multi.js';
 
 const config = {
-    width: 1080,
-    height: 720,
+    width: 1920,
+    height: 1080,
     type: Phaser.AUTO,
     parent: 'game-canvas',
     backgroundColor: '#000',
@@ -15,7 +15,7 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: {
-                y: 200
+                y: 300
             },
         },
         debug:true

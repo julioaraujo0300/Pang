@@ -7,6 +7,9 @@ export class LoadScene extends Phaser.Scene {
         this.load.image('background', './images/blue_land.png');
         this.load.image('1playerbutton', './images/1PlayerButton.png');
         this.load.image('2playerbutton', './images/2PlayerButton.png');
+        this.load.image('harpoon','./images/Harpoon.png');
+        this.load.image('ball', './images/ballBlue.png');
+        this.load.image('ceiling', './images/ceiling.png');
         this.load.spritesheet('player', './images/player.png', {
             frameWidth: 128,
             frameHeight: 144
