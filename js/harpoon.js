@@ -6,7 +6,7 @@ export class Harpoon extends Phaser.Physics.Arcade.Sprite{
         this.body.allowGravity = false;
 
         // this.setCollideWorldBounds(true);
-        this.setScale(0.8);
+        this.setScale(1.2);
 
         this.velocity = -800;
     }

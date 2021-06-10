@@ -9,11 +9,11 @@ export class Level1 extends Phaser.Scene{
     }
 
     init() {
-        this.Yoffset = 375;
+        this.Yoffset = 720;
     }
 
     create() {
-        this.add.image(0,0,'background').setOrigin(0).setScale(2);
+        this.add.image(0,0,'background').setOrigin(0).setScale(1);
         this.canFire = true;
 
         this.player = new Player(
@@ -28,24 +28,24 @@ export class Level1 extends Phaser.Scene{
             this.game.config.height + this.Yoffset,
             'harpoon'
             );
-        this.ball = new Ball(
+        this.ballFirst = new Ball(
             this,
             this.game.config.width * 0.5,
             this.game.config.height * 0.3,
-            'ball', 2, 300
+            'pizza1', 0.5, 300, false
             );
         this.ceiling = new BlockHorizontal(
             this,
             this.game.config.width * 0.5,
-            this.game.config.height - 1070,
+            this.game.config.height - 1080,
             'ceiling', true
         )
             
         this.physics.add.existing(this.player);
         this.player.body.setCollideWorldBounds(true);
-        this.physics.add.collider(this.harpoon, this.ball, this.onCollision, null, this);
-        this.physics.add.collider(this.harpoon, this.ceiling, this.onCollision, null, this);
-
+        this.physics.add.collider(this.harpoon, this.ballFirst, this.onCollisionBallFirst, null, this);
+        this.physics.add.collider(this.harpoon, this.ceiling, this.onCollisionCeiling, null, this);
+        this.physics.add.collider(this.player, this.ballFirst, this.onCollisionPlayer, null, this);
     }
 
     update(time){
@@ -54,7 +54,6 @@ export class Level1 extends Phaser.Scene{
             this.fireHarpoon();
         }
         this.player.update(time);
-        console.log(this.canFire);
     }
 
     fireHarpoon(){
@@ -63,10 +62,119 @@ export class Level1 extends Phaser.Scene{
         this.harpoon.setVelocityY(this.harpoon.velocity);
     }
 
-    onCollision(){
+    FirstBallDestroyLogic(){
+        if(this.ballFirst.destroyed){
+            this.ballSecond = new Ball(
+                this,
+                this.player.x,
+                this.game.config.height * 0.4,
+                'pizza2', 0.3, 300, false
+                );
+            this.ballSecond = new Ball(
+                this,
+                this.player.x,
+                this.game.config.height * 0.4,
+                'pizza2', 0.3, 300, true
+                );
+            this.physics.add.collider(this.harpoon, this.ballSecond, this.onCollisionBallSecond, null, this);
+            this.physics.add.collider(this.harpoon, this.ballSecond, this.onCollisionBallSecond, null, this);
+        }
+    }
+
+    SecondBallDestroyLogic(){
+        if(this.ballSecond.destroyed){
+            this.ballThird = new Ball(
+                this,
+                this.player.x,
+                this.game.config.height * 0.5,
+                'pizza3', 0.3, 300, false
+                );
+            this.ballThird = new Ball(
+                this,
+                this.player.x,
+                this.game.config.height * 0.5,
+                'pizza3', 0.3, 300, true
+                );
+            this.physics.add.collider(this.harpoon, this.ballThird, this.onCollisionBallThird, null, this);
+        }
+        // if(this.ballSecond2.destroyed){
+        //     this.ballThird1 = new Ball(
+        //         this,
+        //         this.player.x,
+        //         this.game.config.height * 0.5,
+        //         'pizza3', 0.2, 300, false
+        //         );
+        //     this.ballThird2 = new Ball(
+        //         this,
+        //         this.player.x,
+        //         this.game.config.height * 0.5,
+        //         'pizza3', 0.2, 300, true
+        //         );
+            this.physics.add.collider(this.harpoon, this.ballThird, this.onCollisionBallThird, null, this);
+        // }
+    }
+
+    ballReload(){
+        this.ballFirst.destroy();
+        this.ballFirst = new Ball(
+            this,
+            this.game.config.width * 0.5,
+            this.game.config.height * 0.3,
+            'pizza1', 0.5, 300, false
+            );
+        this.physics.add.collider(this.player, this.ballFirst, this.onCollisionPlayer, null, this);
+    }
+
+    onCollisionBallFirst(){
+        this.harpoon.setVelocityY(0);
+        this.harpoon.y = this.game.config.height + this.Yoffset;
+        this.harpoon.setImmovable(true);
+        this.ballFirst.destroyed = true;
+        this.ballFirst.destroy();
+        this.FirstBallDestroyLogic();
+        this.canFire = true;
+    }
+    onCollisionBallSecond(){
+        this.harpoon.setVelocityY(0);
+        this.harpoon.y = this.game.config.height + this.Yoffset;
+        this.harpoon.setImmovable(true);
+        this.ballSecond.destroyed = true;
+        this.ballSecond.destroy();
+        this.SecondBallDestroyLogic();
+        this.canFire = true;
+    }
+    // onCollisionBallSecond2(){
+    //     this.harpoon.setVelocityY(0);
+    //     this.harpoon.y = this.game.config.height + this.Yoffset;
+    //     this.harpoon.setImmovable(true);
+    //     this.ballSecond2.destroyed = true;
+    //     this.ballSecond2.destroy();
+    //     this.SecondBallDestroyLogic();
+    //     this.canFire = true;
+    // }
+    onCollisionBallThird(){
+        this.harpoon.setVelocityY(0);
+        this.harpoon.y = this.game.config.height + this.Yoffset;
+        this.harpoon.setImmovable(true);
+        this.ballSecond.destroyed = true;
+        this.ballSecond.destroy();
+        this.ballSpawner();
+        this.canFire = true;
+    }
+    onCollisionCeiling(){
         this.harpoon.setVelocityY(0);
         this.harpoon.y = this.game.config.height + this.Yoffset;
         this.harpoon.setImmovable(true);
         this.canFire = true;
+    }
+    onCollisionPlayer(){
+        console.log(this.player.lives);
+        this.player.lives--;
+        if(this.player.lives <= 0){
+            this.scene.start('Menu');
+        }else{
+            this.player.x = this.game.config.width * 0.5;
+            this.ballReload();
+        }
     }
 }

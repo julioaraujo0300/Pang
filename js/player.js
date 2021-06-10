@@ -12,7 +12,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite{
         this.secondPlayer = isPlayer2;
         this.firePressed = false;
 
-        this.horizontal_velocity = 200;
+        this.horizontal_velocity = 270;
+        this.lives = 3;
 
         this.controls = scene.input.keyboard.createCursorKeys();
         this.Akey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);

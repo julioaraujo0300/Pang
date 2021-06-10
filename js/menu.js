@@ -9,7 +9,7 @@ export class Menu extends Phaser.Scene{
     }
     
     create() {
-        this.add.image(0,0,'background').setOrigin(0).setScale(2);
+        this.add.image(0,0,'background').setOrigin(0).setScale(1);
         this.offset = 100;
         this.singlePlayerButton = this.add.image(this.game.config.width * 0.5, 
                                                 this.game.config.height * 0.5 - this.offset,
