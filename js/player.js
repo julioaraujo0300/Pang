@@ -75,13 +75,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite{
         if(this.secondPlayer){
             if(this.FireKey.isDown){
                 this.firePressed = true;
-                // this.harpoon = new Harpoon(
-                //     this,
-                //     this.x,
-                //     this.game.config.height * 0.5,
-                //     'harpoon'
-                // );
-            }else{}
+            }else{
+                this.firePressed = false;
+            }
         }
         else{
             if(this.controls.space.isDown){
