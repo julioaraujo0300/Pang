@@ -8,9 +8,6 @@ export class Level2 extends Phaser.Scene{
         super('Level2');
     }
 
-    init() {
-    }
-    
     create() {
         this.add.image(0,0,'background').setOrigin(0).setScale(1);
         let style = { font: "bold 32px Arial", fill: "#000", boundsAlignH: "center", boundsAlignV: "middle"  };
