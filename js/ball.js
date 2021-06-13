@@ -8,6 +8,7 @@ export class Ball extends Phaser.Physics.Arcade.Sprite {
         this.setBounce(1, 1);
 
         this.destroyed = false;
+        
         this.setScale(scale);
         if(reverseDirection){
             this.setVelocity(-velocity ,0);

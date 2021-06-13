@@ -13,6 +13,7 @@ export class LoadScene extends Phaser.Scene {
         this.load.image('pizza3', './images/pizza3.png');
         this.load.image('pizza4', './images/pizza4.png');
         this.load.image('ceiling', './images/ceiling.png');
+        this.load.image('menu', './images/MenuButton.png');
         this.load.spritesheet('player', './images/player.png', {
             frameWidth: 114,
             frameHeight: 223

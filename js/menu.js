@@ -1,11 +1,7 @@
 export class Menu extends Phaser.Scene{
     constructor(){
         super('Menu');
-
         this.singlePlayer = false;
-    }
-
-    init() {
     }
     
     create() {
@@ -21,9 +17,6 @@ export class Menu extends Phaser.Scene{
         this.multiPlayerButton.setInteractive();
         this.singlePlayerButton.on('pointerdown', () => this.transitionToLevel(1));
         this.multiPlayerButton.on('pointerdown', () => this.transitionToLevel(2));
-    }
-
-    update(time){
     }
 
     transitionToLevel(numberPlayers){

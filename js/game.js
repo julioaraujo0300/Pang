@@ -3,6 +3,7 @@ import { Menu } from './menu.js';
 import { Level1 } from './level1.js';
 import { Level2 } from './level2.js';
 import { Level1Multi } from './level1multi.js';
+import { Victory } from './victory.js';
 
 const config = {
     width: 1920,
@@ -10,7 +11,7 @@ const config = {
     type: Phaser.AUTO,
     parent: 'game-canvas',
     backgroundColor: '#000',
-    scene: [LoadScene, Level1, Level2, Level1Multi, Menu],
+    scene: [LoadScene, Level1, Level2, Level1Multi, Menu, Victory],
     physics: {
         default: 'arcade',
         arcade: {

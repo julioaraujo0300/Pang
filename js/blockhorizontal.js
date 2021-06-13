@@ -6,17 +6,5 @@ export class BlockHorizontal extends Phaser.Physics.Arcade.Sprite{
         this.body.allowGravity = false;
         this.image = texture;
         this.setImmovable(true);
-
-        // if(flipped){
-        //     this.image.rotation = 90;
-        // }else{
-        //     this.image.rotation = 0;
-        // }
-        // this.setCollideWorldBounds(true);
-
-    }
-
-    update(time){
-        
     }
 }
